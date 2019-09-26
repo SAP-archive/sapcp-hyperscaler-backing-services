@@ -5,20 +5,19 @@ This repository of assets supports the consumption of hyperscaler backing servic
 
 ## Overview
 
-Following the core principles of ‘**openness**‘ and ‘**freedom of choice**‘, SAP Cloud Platform released an updated strategy, which outlines that the platform will partner and enable integration with hyper-scale providers intensively, to procure commodity technical services like open-source backing services.
+Following the core principles of *openness* and *freedom of choice*, SAP Cloud Platform released an updated strategy that outlines how the platform will partner and enable integration with hyperscale providers intensively to procure commoditized technical services such as open source backing services.
 
-SAP Cloud Platform is announced to be available on the following hyper-scalers – Amazon Web Service(AWS), Microsoft Azure, Google Cloud Platform (GCP) and Alibaba Cloud (AliCloud).
+SAP Cloud Platform is announced to be available on the following hyperscalers – Amazon Web Service (AWS), Microsoft Azure, Google Cloud Platform (GCP), and Alibaba Cloud (AliCloud).
 
-As of today, the platform plans to support consumption of 'PostgreSQL' services from the above hyper-scale providers. 
-Support for Amazon RDS PostgreSQL and Azure Database for PostgreSQL has been released. Work on support for Google Cloud SQL for PostgreSQL is underway.
+As of today, the platform plans to support consumption of 'PostgreSQL' services from the above hyperscale providers. Support for Amazon RDS PostgreSQL and Azure Database for PostgreSQL has been released. Work on support for Google Cloud SQL for PostgreSQL is underway.
 
-Through this repository, we intend to share assets like sample code, which can help customers/partners/stakeholders in consuming open-source backing services from hyperscaler on SAP Cloud Platform. These assets will be grouped into folders based on the hyper-scale provider like AWS, AZURE, GCP and so on, with their respective README files.
+Through this repository, we intend to share assets like sample code, which can help customers/partners/stakeholders in consuming open source backing services from hyperscalers on SAP Cloud Platform. These assets will be grouped into folders based on the hyperscale provider like AWS, AZURE, GCP, and so on, with their respective README files.
 
 ## Requirements
 
-The hyper-scaler strategy for backing services has been built on the foundation of **BYOA - 'Bring Your Own Account'**. 
+The hyperscaler strategy for backing services has been built on the foundation of **BYOA - 'Bring Your Own Account'**. 
 
-This means to consume open-source backing services from hyper-scalers on SAP Cloud Platform, consumers will be expected to procure accounts/subscriptions directly from hyper-scale providers in addition to procuring a SAP Cloud Platform account.
+This means to consume open-source backing services from hyperscalers on SAP Cloud Platform, consumers will be expected to procure accounts/subscriptions directly from hyperscale providers in addition to procuring a SAP Cloud Platform account.
 
 Administrator access to the hyper-scaler account - to create account configurations, keys, users would be mandatory.
 
