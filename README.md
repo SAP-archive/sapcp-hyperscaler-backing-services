@@ -1,7 +1,7 @@
 <img align="right" width=300 src="/img/SAPCP-HyperScalers.png">
 
 # SAP Cloud Platform Hyperscaler Backing Services
-This project is designated to be the repository of assets from SAP, to support the consumption of hyper-scaler backing services from SAP Cloud Platform.
+This repository of assets supports the consumption of hyperscaler backing services from SAP Cloud Platform.
 
 ## Overview
 
@@ -24,18 +24,18 @@ Administrator access to the hyper-scaler account - to create account configurati
 
 ## Download and Installation
 
-The procedure to download and install each asset will be covered in the corresponding README files.
+The procedure to download and install each asset will be covered in the corresponding README file.
 
 ## Known Issues
 
-Known issues for each asset will be covered in the corresponding README files.
+Known issues for each asset will be covered in the corresponding README file.
 
 ## Support
 
-The project is delivered on an "AS IS" BASIS, WITHOUT WARRANTIES, SUPPORT OR CONDITIONS OF ANY KIND, either express or implied.
+The project is delivered on an "AS IS" basis, without warranties, support conditions of any kind, either express or implied.
 
 ## License
 
 Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
 
-This file is licensed under the SAP Sample Code License, except as noted otherwise in the [LICENSE](/LICENSE.pdf) file.
+This file is licensed under the SAP Sample Code License, except as noted otherwise in the [LICENSE](/LICENSE) file.
