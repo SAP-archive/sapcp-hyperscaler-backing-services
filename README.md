@@ -17,9 +17,9 @@ Through this repository, we intend to share assets like sample code, which can h
 
 The hyperscaler strategy for backing services has been built on the foundation of **BYOA - 'Bring Your Own Account'**. 
 
-This means to consume open-source backing services from hyperscalers on SAP Cloud Platform, consumers will be expected to procure accounts/subscriptions directly from hyperscale providers in addition to procuring a SAP Cloud Platform account.
+This means to consume open source backing services from hyperscalers on SAP Cloud Platform, consumers will be expected to procure accounts/subscriptions directly from hyperscale providers in addition to procuring a SAP Cloud Platform account.
 
-Administrator access to the hyper-scaler account - to create account configurations, keys, users would be mandatory.
+Administrator access to the hyperscaler account - to create account configurations, keys, users would be mandatory.
 
 ## Download and Installation
 
