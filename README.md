@@ -13,6 +13,10 @@ As of today, the platform plans to support consumption of 'PostgreSQL' services 
 
 Through this repository, we intend to share assets like sample code, which can help customers/partners/stakeholders in consuming open source backing services from hyperscalers on SAP Cloud Platform. These assets will be grouped into folders based on the hyperscale provider like AWS, AZURE, GCP, and so on, with their respective README files.
 
+### Index:
+
+[AWS account setup to consume Amazon RDS PostgreSQL](/AWS/Amazon RDS Setup/README.md)
+
 ## Requirements
 
 The hyperscaler strategy for backing services has been built on the foundation of **BYOA - 'Bring Your Own Account'**. 
