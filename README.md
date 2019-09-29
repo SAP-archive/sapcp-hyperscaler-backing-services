@@ -15,7 +15,7 @@ Through this repository, we intend to share assets like sample code, which can h
 
 ### Index:
 
-[AWS account setup to consume Amazon RDS PostgreSQL](AWS/Amazon RDS Setup/README.md)
+[AWS account setup to consume Amazon RDS PostgreSQL](/AWS/Amazon-RDS-Setup/README.md)
 
 ## Requirements
 
