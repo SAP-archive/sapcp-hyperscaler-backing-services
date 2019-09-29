@@ -17,35 +17,35 @@ As the above manual procedure tends to be error-prone, we provide a [AWS CloudFo
 	* *AmazonVPCFullAccess*
 	* *AmazonS3FullAccess*
 
-<img src="/AWS/Amazon RDS Setup/img/AWSIAMPolicy.png">
+<img src="/AWS/Amazon-RDS-Setup/img/AWSIAMPolicy.png">
 
 ## Download and Use
 
 * Clone or Download the CloudFormation template file **backserv-vpc-cloudformation-template.yml** from this repository.
 * Sign-in to the AWS Console of your account with the IAM user created above.
 * In the AWS Console, in the ***Services*** dropdown and search for the service '**CloudFormation**'.
-<img src="/AWS/Amazon RDS Setup/img/CloudFormation.png">
+<img src="/AWS/Amazon-RDS-Setup/img/CloudFormation.png">
 
 * Select ***Stacks*** in the navigation pane and click **Create Stack**. 
-<img src="/AWS/Amazon RDS Setup/img/Stack.png">
+<img src="/AWS/Amazon-RDS-Setup/img/Stack.png">
 
 * Under ***Prerequisite - Prepare Template*** section, select **Template is ready**
 * Under the ***Specify template***, pick **Upload a template file**.
 * Click **Choose file** to select and upload the CloudFormation template from your local system to Amazon S3.
-<img src="/AWS/Amazon RDS Setup/img/CreateStack.png">
+<img src="/AWS/Amazon-RDS-Setup/img/CreateStack.png">
 
 * Choose **Next**.
 * Enter a **Stack name** and fill in the **Parameters** as you feel necessary.Note that you choose the CIDR ranges so that they do not overlap with any other VPC in your account. 
-<img src="/AWS/Amazon RDS Setup/img/StackDetails.png">
+<img src="/AWS/Amazon-RDS-Setup/img/StackDetails.png">
 
 * Choose **Next**.
 * Choose **Next** on ***Configure stack options*** screen.
 * Run the template by choosing **Create stack** on ***Review Test*** screen.
 * Wait until the run completes with status **CREATE_COMPLETE**. You can monitor the run from the ***Events*** tab.
-<img src="/AWS/Amazon RDS Setup/img/StackComplete.png">
+<img src="/AWS/Amazon-RDS-Setup/img/StackComplete.png">
 
 * Note the VPC id from the export of the run in the ***Outputs*** tab. This will be used in the creation of a Resource Provider on SAP Cloud Platform.
-<img src="/AWS/Amazon RDS Setup/img/StackOutput.png">
+<img src="/AWS/Amazon-RDS-Setup/img/StackOutput.png">
 
 
 ## Known Issues
