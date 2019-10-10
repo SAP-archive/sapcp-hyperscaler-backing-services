@@ -1,16 +1,16 @@
 Description:
   This template deploys a VPC, with a pair of public subnets and a pair of private subnets 
-  spread across two Availability Zones. It deploys an Internet Gateway, with a default
+  spread across two Availability Zones of your choice. It deploys an Internet Gateway, with a default
   route on the public subnets. It also creates a SecurityGroup to allow PostgreSQL 
   traffic to the RDS instance.
 
 Parameters:
-  1EnvironmentName:
+  EnvironmentName:
     Description: An environment name that will be prefixed to resource names
     Type: String
     Default: SAPCP-
 
-  2Landscape:
+  Landscape:
     Description: The SAP Cloud Platform region where the setup will be used
     Type: String
     Default: EU10
@@ -23,32 +23,32 @@ Parameters:
       - JP10
       - US10
 
-  3UserAvailabilityZones:
+  VpcAvailabilityZones:
     Description: Please select 2 Availability Zone (AZ) for your Subnets [MANDATORY]
     Type: List<AWS::EC2::AvailabilityZone::Name>
 
-  4VpcCIDR:
+  VpcCIDR:
     Description: Please enter the IP range (CIDR notation) for this VPC
     Type: String
-    Default: 10.1.0.0/16  
+    Default: 10.1.0.0/16
 
-  5PublicSubnet1CIDR:
-    Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone - Should be subset of VPC CIDR and unique
+  VpcPrivateSubnet1CIDR:
+    Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone - Should be subset of VPC CIDR and unique
     Type: String
     Default: 10.1.0.0/24
 
-  6PublicSubnet2CIDR:
-    Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone - Should be subset of VPC CIDR and unique
+  VpcPrivateSubnet2CIDR:
+    Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone - Should be subset of VPC CIDR and unique
     Type: String
     Default: 10.1.1.0/24
-    
-  7PrivateSubnet1CIDR:
-    Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone - Should be subset of VPC CIDR and unique
+
+  VpcPublicSubnet1CIDR:
+    Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone - Should be subset of VPC CIDR and unique
     Type: String
     Default: 10.1.2.0/24
 
-  8PrivateSubnet2CIDR:
-    Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone - Should be subset of VPC CIDR and unique
+  VpcPublicSubnet2CIDR:
+    Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone - Should be subset of VPC CIDR and unique
     Type: String
     Default: 10.1.3.0/24
 
@@ -56,19 +56,19 @@ Resources:
   VPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: !Ref 4VpcCIDR
+      CidrBlock: !Ref VpcCIDR
       EnableDnsSupport: true
       EnableDnsHostnames: true
       Tags:
         - Key: Name
-          Value: !Sub ${1EnvironmentName}${2Landscape} VPC
+          Value: !Sub ${EnvironmentName}${Landscape} VPC
 
   InternetGateway:
     Type: AWS::EC2::InternetGateway
     Properties:
       Tags:
         - Key: Name
-          Value: !Sub ${1EnvironmentName}${2Landscape} InternetGateway
+          Value: !Sub ${EnvironmentName}${Landscape} InternetGateway
 
   InternetGatewayAttachment:
     Type: AWS::EC2::VPCGatewayAttachment
@@ -80,45 +80,45 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      AvailabilityZone: !Select [0, !Ref 3UserAvailabilityZones]
-      CidrBlock: !Ref 5PublicSubnet1CIDR
+      AvailabilityZone: !Select [0, !Ref VpcAvailabilityZones]
+      CidrBlock: !Ref VpcPublicSubnet1CIDR
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
-          Value: !Sub ${1EnvironmentName}${2Landscape} Public Subnet (AZ1)
+          Value: !Sub ${EnvironmentName}${Landscape} Public Subnet (AZ1)
 
   PublicSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      AvailabilityZone: !Select [1, !Ref 3UserAvailabilityZones]
-      CidrBlock: !Ref 6PublicSubnet2CIDR
+      AvailabilityZone: !Select [1, !Ref VpcAvailabilityZones]
+      CidrBlock: !Ref VpcPublicSubnet2CIDR
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
-          Value: !Sub ${1EnvironmentName}${2Landscape} Public Subnet (AZ2)
+          Value: !Sub ${EnvironmentName}${Landscape} Public Subnet (AZ2)
 
   PrivateSubnet1:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      AvailabilityZone: !Select [0, !Ref 3UserAvailabilityZones]
-      CidrBlock: !Ref 7PrivateSubnet1CIDR
+      AvailabilityZone: !Select [0, !Ref VpcAvailabilityZones]
+      CidrBlock: !Ref VpcPrivateSubnet1CIDR
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
-          Value: !Sub ${1EnvironmentName}${2Landscape} Private Subnet (AZ1)
+          Value: !Sub ${EnvironmentName}${Landscape} Private Subnet (AZ1)
 
   PrivateSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      AvailabilityZone: !Select [1, !Ref 3UserAvailabilityZones]
-      CidrBlock: !Ref 8PrivateSubnet2CIDR
+      AvailabilityZone: !Select [1, !Ref VpcAvailabilityZones]
+      CidrBlock: !Ref VpcPrivateSubnet2CIDR
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
-          Value: !Sub ${1EnvironmentName}${2Landscape} Private Subnet (AZ2)
+          Value: !Sub ${EnvironmentName}${Landscape} Private Subnet (AZ2)
 
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
@@ -126,7 +126,7 @@ Resources:
       VpcId: !Ref VPC
       Tags:
         - Key: Name
-          Value: !Sub ${1EnvironmentName}${2Landscape} Public Routes
+          Value: !Sub ${EnvironmentName}${Landscape} Public Routes
 
   DefaultPublicRoute:
     Type: AWS::EC2::Route
@@ -151,7 +151,7 @@ Resources:
   PostgresIngressSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: !Sub ${1EnvironmentName} postgres-sg
+      GroupName: !Sub ${EnvironmentName} postgres-sg
       GroupDescription: "Security group to allow PostgreSQL connection"
       VpcId: !Ref VPC
       SecurityGroupIngress:

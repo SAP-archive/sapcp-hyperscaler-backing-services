@@ -40,6 +40,7 @@ As the above manual procedure tends to be error-prone, we provide a [AWS CloudFo
 
 * Choose **Next**.
 * Choose **Next** on ***Configure stack options*** screen.
+* Check the parameter values selected are as per your requirement.
 * Run the template by choosing **Create stack** on ***Review Test*** screen.
 * Wait until the run completes with status **CREATE_COMPLETE**. You can monitor the run from the ***Events*** tab.
 <img src="/AWS/Amazon-RDS-Setup/img/StackComplete.png">
