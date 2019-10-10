@@ -35,7 +35,7 @@ As the above manual procedure tends to be error-prone, we provide a [AWS CloudFo
 <img src="/AWS/Amazon-RDS-Setup/img/CreateStack.png">
 
 * Choose **Next**.
-* Enter a **Stack name** and fill in the **Parameters** as you feel necessary.Note that you choose the CIDR ranges so that they do not overlap with any other VPC in your account. 
+* Enter a **Stack name** and fill in the **Parameters** as you feel necessary. Choose ***any 2 Availability Zones (AZ) or choose 2 AZs of your choice***. Note that you choose the CIDR ranges so that they do not overlap with any other VPC in your account. 
 <img src="/AWS/Amazon-RDS-Setup/img/StackDetails.png">
 
 * Choose **Next**.
