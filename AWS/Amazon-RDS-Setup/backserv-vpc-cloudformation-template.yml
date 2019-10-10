@@ -5,37 +5,49 @@ Description:
   traffic to the RDS instance.
 
 Parameters:
-  EnvironmentName:
+  1EnvironmentName:
     Description: An environment name that will be prefixed to resource names
     Type: String
     Default: SAPCP-
 
-  Landscape:
-    Description: The SAP Cloud Platform region where the setup is being run
+  2Landscape:
+    Description: The SAP Cloud Platform region where the setup will be used
     Type: String
     Default: EU10
+    AllowedValues:
+      - AP10
+      - AP11
+      - BR10
+      - CA10
+      - EU10
+      - JP10
+      - US10
 
-  VpcCIDR:
+  3UserAvailabilityZones:
+    Description: Please select 2 Availability Zone (AZ) for your Subnets [MANDATORY]
+    Type: List<AWS::EC2::AvailabilityZone::Name>
+
+  4VpcCIDR:
     Description: Please enter the IP range (CIDR notation) for this VPC
     Type: String
-    Default: 10.1.0.0/16
+    Default: 10.1.0.0/16  
 
-  PublicSubnet1CIDR:
+  5PublicSubnet1CIDR:
     Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone - Should be subset of VPC CIDR and unique
     Type: String
     Default: 10.1.0.0/24
 
-  PublicSubnet2CIDR:
+  6PublicSubnet2CIDR:
     Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone - Should be subset of VPC CIDR and unique
     Type: String
     Default: 10.1.1.0/24
     
-  PrivateSubnet1CIDR:
+  7PrivateSubnet1CIDR:
     Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone - Should be subset of VPC CIDR and unique
     Type: String
     Default: 10.1.2.0/24
 
-  PrivateSubnet2CIDR:
+  8PrivateSubnet2CIDR:
     Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone - Should be subset of VPC CIDR and unique
     Type: String
     Default: 10.1.3.0/24
@@ -44,19 +56,19 @@ Resources:
   VPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: !Ref VpcCIDR
+      CidrBlock: !Ref 4VpcCIDR
       EnableDnsSupport: true
       EnableDnsHostnames: true
       Tags:
         - Key: Name
-          Value: !Sub ${EnvironmentName}${Landscape} VPC
+          Value: !Sub ${1EnvironmentName}${2Landscape} VPC
 
   InternetGateway:
     Type: AWS::EC2::InternetGateway
     Properties:
       Tags:
         - Key: Name
-          Value: !Sub ${EnvironmentName}${Landscape} InternetGateway
+          Value: !Sub ${1EnvironmentName}${2Landscape} InternetGateway
 
   InternetGatewayAttachment:
     Type: AWS::EC2::VPCGatewayAttachment
@@ -68,45 +80,45 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      AvailabilityZone: !Select [ 0, !GetAZs '' ]
-      CidrBlock: !Ref PublicSubnet1CIDR
+      AvailabilityZone: !Select [0, !Ref 3UserAvailabilityZones]
+      CidrBlock: !Ref 5PublicSubnet1CIDR
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
-          Value: !Sub ${EnvironmentName}${Landscape} Public Subnet (AZ1)
+          Value: !Sub ${1EnvironmentName}${2Landscape} Public Subnet (AZ1)
 
   PublicSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      AvailabilityZone: !Select [ 1, !GetAZs '' ]
-      CidrBlock: !Ref PublicSubnet2CIDR
+      AvailabilityZone: !Select [1, !Ref 3UserAvailabilityZones]
+      CidrBlock: !Ref 6PublicSubnet2CIDR
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
-          Value: !Sub ${EnvironmentName}${Landscape} Public Subnet (AZ2)
+          Value: !Sub ${1EnvironmentName}${2Landscape} Public Subnet (AZ2)
 
   PrivateSubnet1:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      AvailabilityZone: !Select [ 0, !GetAZs '' ]
-      CidrBlock: !Ref PrivateSubnet1CIDR
+      AvailabilityZone: !Select [0, !Ref 3UserAvailabilityZones]
+      CidrBlock: !Ref 7PrivateSubnet1CIDR
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
-          Value: !Sub ${EnvironmentName}${Landscape} Private Subnet (AZ1)
+          Value: !Sub ${1EnvironmentName}${2Landscape} Private Subnet (AZ1)
 
   PrivateSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      AvailabilityZone: !Select [ 1, !GetAZs '' ]
-      CidrBlock: !Ref PrivateSubnet2CIDR
+      AvailabilityZone: !Select [1, !Ref 3UserAvailabilityZones]
+      CidrBlock: !Ref 8PrivateSubnet2CIDR
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
-          Value: !Sub ${EnvironmentName}${Landscape} Private Subnet (AZ2)
+          Value: !Sub ${1EnvironmentName}${2Landscape} Private Subnet (AZ2)
 
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
@@ -114,7 +126,7 @@ Resources:
       VpcId: !Ref VPC
       Tags:
         - Key: Name
-          Value: !Sub ${EnvironmentName}${Landscape} Public Routes
+          Value: !Sub ${1EnvironmentName}${2Landscape} Public Routes
 
   DefaultPublicRoute:
     Type: AWS::EC2::Route
@@ -139,7 +151,7 @@ Resources:
   PostgresIngressSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: !Sub ${EnvironmentName} postgres-sg
+      GroupName: !Sub ${1EnvironmentName} postgres-sg
       GroupDescription: "Security group to allow PostgreSQL connection"
       VpcId: !Ref VPC
       SecurityGroupIngress:
